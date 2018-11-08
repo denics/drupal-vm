@@ -24,7 +24,8 @@
       loop_control:
         loop_var: outer_item
       with_fileglob: "{{ pre_provision_tasks_dir|default(omit) }}"
-
+      
+    - import_tasks: tasks/extras.yml
     - import_tasks: tasks/php.yml
 
   roles:
@@ -102,7 +103,6 @@
 
   tasks:
     - import_tasks: tasks/sshd.yml
-    - import_tasks: tasks/extras.yml
 
     - include_tasks: tasks/apparmor.yml
       when: ansible_os_family == 'Debian' and drupal_db_backend == 'mysql'
